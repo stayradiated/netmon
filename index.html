@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Monitor</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="health-badge" id="healthBadge" aria-label="Network status">
+                <span class="badge-icon">●</span>
+                <span class="badge-text">Checking...</span>
+            </div>
+            <h1>Network Monitor</h1>
+        </header>
+
+        <main class="metrics-grid">
+            <div class="metric-card">
+                <h2>HTTP Latency</h2>
+                <div class="metric-value">
+                    <span id="rttValue">--</span>
+                    <span class="metric-unit">ms</span>
+                </div>
+                <div class="metric-subtitle">Round Trip Time</div>
+                <div class="chart-container">
+                    <canvas id="rttChart"></canvas>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <h2>Success Rate</h2>
+                <div class="metric-value">
+                    <span id="successValue">--</span>
+                    <span class="metric-unit">%</span>
+                </div>
+                <div class="metric-subtitle">Last 8 pings</div>
+            </div>
+
+            <div class="metric-card">
+                <h2>Download Speed</h2>
+                <div class="metric-value">
+                    <span id="downloadValue">--</span>
+                    <span class="metric-unit">KB/s</span>
+                </div>
+                <div class="metric-subtitle">Burst speed test</div>
+                <div class="chart-container">
+                    <canvas id="downloadChart"></canvas>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="status-line">
+                <span>Last update: <span id="lastUpdate">Never</span></span>
+                <span>Next download test: <span id="nextDownload">--</span></span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="netmon.js"></script>
+</body>
+</html>

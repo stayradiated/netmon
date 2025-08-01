@@ -1,0 +1,191 @@
+:root {
+    --bg-primary: #000000;
+    --bg-secondary: #1a1a1a;
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --border-color: #333333;
+    --status-good: #4ade80;
+    --status-warn: #fbbf24;
+    --status-bad: #ef4444;
+    --chart-line: #60a5fa;
+    --chart-grid: #374151;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    font-size: 24px;
+    line-height: 1.4;
+}
+
+.container {
+    width: 100%;
+    max-width: 1920px;
+    max-height: 1080px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+h1 {
+    font-size: 48px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.health-badge {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 32px;
+    border-radius: 100px;
+    font-size: 28px;
+    font-weight: 500;
+    background-color: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.badge-icon {
+    font-size: 36px;
+    line-height: 1;
+}
+
+.health-badge.good {
+    border-color: var(--status-good);
+    background-color: rgba(74, 222, 128, 0.1);
+}
+
+.health-badge.good .badge-icon {
+    color: var(--status-good);
+}
+
+.health-badge.warn {
+    border-color: var(--status-warn);
+    background-color: rgba(251, 191, 36, 0.1);
+}
+
+.health-badge.warn .badge-icon {
+    color: var(--status-warn);
+}
+
+.health-badge.bad {
+    border-color: var(--status-bad);
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+.health-badge.bad .badge-icon {
+    color: var(--status-bad);
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    flex: 1;
+}
+
+.metric-card {
+    background-color: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.metric-card h2 {
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.metric-value {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 20px 0;
+}
+
+.metric-value span:first-child {
+    font-size: 72px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.metric-unit {
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+.metric-subtitle {
+    font-size: 24px;
+    color: var(--text-secondary);
+}
+
+.chart-container {
+    flex: 1;
+    min-height: 200px;
+    margin-top: 20px;
+}
+
+footer {
+    padding-top: 20px;
+    border-top: 2px solid var(--border-color);
+}
+
+.status-line {
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 1600px) {
+    .metrics-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, 1fr);
+    }
+    
+    .metric-card {
+        padding: 30px;
+    }
+    
+    .chart-container {
+        min-height: 150px;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --bg-primary: #ffffff;
+        --bg-secondary: #f3f4f6;
+        --text-primary: #111827;
+        --text-secondary: #6b7280;
+        --border-color: #e5e7eb;
+        --chart-line: #3b82f6;
+        --chart-grid: #e5e7eb;
+    }
+}
