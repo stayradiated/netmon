@@ -15,7 +15,7 @@ const CONFIG = {
     },
     
     timing: {
-        rttInterval: 15000,         // 15 seconds
+        rttInterval: 1000,          // 1 second
         downloadInterval: 1800000,  // 30 minutes
         probeTimeout: 6000,         // 6 seconds
         downloadTimeout: 12000,     // 12 seconds

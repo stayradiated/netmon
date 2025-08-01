@@ -384,8 +384,8 @@ async function runProbeLoop() {
     trimHistory();
     saveToStorage();
     
-    // Update charts periodically
-    if (Date.now() % CONFIG.ui.chartUpdateInterval < CONFIG.timing.rttInterval) {
+    // Update charts every 10 seconds to avoid performance issues with 1-second updates
+    if (Date.now() % 10000 < CONFIG.timing.rttInterval) {
         updateCharts();
     }
 }

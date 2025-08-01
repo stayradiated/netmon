@@ -4,7 +4,7 @@ A zero-backend, ultra-lightweight network monitoring dashboard designed for Appl
 
 ## Features
 
-- **Real-time HTTP Latency Monitoring** - Measures round-trip time every 15 seconds
+- **Real-time HTTP Latency Monitoring** - Measures round-trip time every second
 - **Connection Success Rate** - Tracks percentage of successful pings (last 8 attempts)
 - **Download Speed Testing** - Periodic burst speed tests every 30 minutes
 - **24-Hour History** - Sparkline charts showing historical trends
@@ -48,7 +48,7 @@ thresholds: {
 
 // Probe intervals
 timing: {
-    rttInterval: 15000,         // How often to check latency (ms)
+    rttInterval: 1000,          // How often to check latency (ms)
     downloadInterval: 1800000,  // How often to test download (ms)
     probeTimeout: 6000,         // Timeout for latency probes (ms)
     downloadTimeout: 12000      // Timeout for download tests (ms)
@@ -78,9 +78,9 @@ timing: {
 ### Bandwidth Usage
 
 With default settings, netmon uses approximately:
-- Latency probes: ~0.2 MB/hour
+- Latency probes: ~3.6 MB/hour (with 1-second interval)
 - Download tests: ~0.25 MB/hour
-- **Total: < 0.5 MB/hour**
+- **Total: < 4 MB/hour**
 
 ### Browser Compatibility
 
