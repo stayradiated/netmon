@@ -245,16 +245,17 @@ function initializeCharts() {
         },
         scales: {
             x: {
+                type: 'linear',
                 display: false
             },
             y: {
                 display: true,
                 grid: {
-                    color: getComputedStyle(document.documentElement).getPropertyValue('--chart-grid'),
-                    borderColor: getComputedStyle(document.documentElement).getPropertyValue('--border-color')
+                    color: getComputedStyle(document.documentElement).getPropertyValue('--chart-grid').trim(),
+                    borderColor: getComputedStyle(document.documentElement).getPropertyValue('--border-color').trim()
                 },
                 ticks: {
-                    color: getComputedStyle(document.documentElement).getPropertyValue('--text-secondary'),
+                    color: getComputedStyle(document.documentElement).getPropertyValue('--text-secondary').trim(),
                     font: {
                         size: 16
                     }
@@ -268,9 +269,10 @@ function initializeCharts() {
     state.charts.rtt = new Chart(rttCtx, {
         type: 'line',
         data: {
+            labels: [],
             datasets: [{
                 data: [],
-                borderColor: getComputedStyle(document.documentElement).getPropertyValue('--chart-line'),
+                borderColor: getComputedStyle(document.documentElement).getPropertyValue('--chart-line').trim(),
                 borderWidth: 2,
                 pointRadius: 0,
                 tension: 0.4,
@@ -295,9 +297,10 @@ function initializeCharts() {
     state.charts.download = new Chart(downloadCtx, {
         type: 'line',
         data: {
+            labels: [],
             datasets: [{
                 data: [],
-                borderColor: getComputedStyle(document.documentElement).getPropertyValue('--chart-line'),
+                borderColor: getComputedStyle(document.documentElement).getPropertyValue('--chart-line').trim(),
                 borderWidth: 2,
                 pointRadius: 0,
                 tension: 0.4,
@@ -320,22 +323,27 @@ function initializeCharts() {
 function updateCharts() {
     // Update RTT chart
     if (state.charts.rtt && state.rttHistory.length > 0) {
-        const rttData = state.rttHistory.map(item => ({
-            x: item.timestamp,
-            y: item.value
-        }));
+        // Decimate data if too many points - show max 300 points
+        let rttData = state.rttHistory;
+        if (rttData.length > 300) {
+            const step = Math.ceil(rttData.length / 300);
+            rttData = rttData.filter((_, index) => index % step === 0);
+        }
         
-        state.charts.rtt.data.datasets[0].data = rttData;
+        // Use simple array format for data
+        const chartData = rttData.map(item => item.value);
+        
+        state.charts.rtt.data.labels = chartData.map((_, index) => index);
+        state.charts.rtt.data.datasets[0].data = chartData;
         state.charts.rtt.update('none');
     }
     
     // Update download chart
     if (state.charts.download && state.downloadHistory.length > 0) {
-        const downloadData = state.downloadHistory.map(item => ({
-            x: item.timestamp,
-            y: item.value
-        }));
+        // Use simple array format for data
+        const downloadData = state.downloadHistory.map(item => item.value);
         
+        state.charts.download.data.labels = downloadData.map((_, index) => index);
         state.charts.download.data.datasets[0].data = downloadData;
         state.charts.download.update('none');
     }
